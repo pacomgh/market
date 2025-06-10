@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market/core/app_colors.dart';
 import 'package:market/views/auth/ui/login_view.dart';
 
 void main() {
@@ -14,7 +15,10 @@ class Market extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Market',
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.kScaffoldColor,
+        useMaterial3: true,
+      ),
       home: const LoginView(),
     );
   }
