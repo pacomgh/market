@@ -6,6 +6,7 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool secure = false;
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -32,17 +33,53 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(height: 20),
                     CustomTextFormField(
+                      isSecure: secure,
                       label: 'Password',
                       suffIcon: IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          secure = !secure;
+                        },
+                        icon: Icon(
+                          secure == false
+                              ? Icons.remove_red_eye
+                              : Icons.visibility_off,
+                        ),
                       ),
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CustomTextButton(onTap: () {}, text: 'Forgot Password'),
+                      ],
                     ),
                   ],
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTextButton extends StatelessWidget {
+  const CustomTextButton({super.key, this.onTap, required this.text});
+
+  final void Function()? onTap;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: TextStyle(
+          color: AppColors.kPrimaryColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
         ),
       ),
     );
